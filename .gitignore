@@ -1,10 +1,48 @@
 HELP.md
 target/
+build/
+out/
+bin/
+*.class
+*.jar
+*.war
+*.ear
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# Sensitive & Secret Configuration Files
+.env
+.env.*
+*.env
+*.key
+*.pem
+*.pfx
+*.p12
+*.jks
+*.keystore
+*secret*
+*credential*
+application-local.properties
+application-local.yml
+application-secret.properties
+application-secret.yml
+application-secrets.properties
+application-secrets.yml
+application.properties
+application.yml
+application.yaml
+application.properties
+.application.properties
+.resources
+resources
+
+
+# Logs
+*.log
+logs/
+
+# STS / Eclipse
 .apt_generated
 .classpath
 .factorypath
@@ -13,21 +51,122 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
+# IntelliJ IDEA
+.idea/
 *.iws
 *.iml
 *.ipr
+out/
 
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
-/nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
+# VS Code
 .vscode/
+
+# OS specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Nested duplicate folder
+/student-management/
+
+
+
+# ============
+# Java
+# ============
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package Files
+*.jar
+*.war
+*.ear
+*.zip
+
+# Maven
+target/
+pom.xml.versionsBackup
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Gradle
+build/
+.gradle/
+**/build/
+**/build.gradle
+**/settings.gradle
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.eclipse/
+*.project
+*.pydevproject
+*.settings/
+*.tmproj
+*.tmproperties
+
+# NetBeans
+nbproject/
+dist/
+nb-configuration.xml
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# IntelliJ
+*.iml
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ============
+# Spring Boot
+# ============
+# Application properties (local overrides)
+application-local.properties
+application-*.properties
+application-*.yml
+application-*.yaml
+
+# Embedded database files
+*.db
+*.h2.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Test reports
+TEST-*.xml
+test-results/
+
+# Dependency management
+gradle/
+gradlew
+gradlew.bat
+.m2/
+
+application.properties
