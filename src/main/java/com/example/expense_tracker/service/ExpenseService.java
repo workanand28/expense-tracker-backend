@@ -6,4 +6,6 @@ import com.example.expense_tracker.dto.ExpenseResponseDTO;
 public interface ExpenseService {
 
     ExpenseResponseDTO createExpense(ExpenseRequestDTO requestDTO);
+
+    ExpenseResponseDTO getExpenseById(String id);
 }

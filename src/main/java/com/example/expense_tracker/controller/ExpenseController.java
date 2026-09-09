@@ -1,5 +1,6 @@
 package com.example.expense_tracker.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +21,18 @@ public class ExpenseController {
     }
 
     @PostMapping
-    public ResponseEntity<ExpenseResponseDTO> saveExpense(@RequestBody ExpenseRequestDTO requestDTO) {
+    public ResponseEntity<ExpenseResponseDTO> saveExpense(@Valid @RequestBody ExpenseRequestDTO requestDTO) {
 
         ExpenseResponseDTO response = expenseService.createExpense(requestDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ExpenseResponseDTO> getExpenseById(@PathVariable String id) {
+
+        ExpenseResponseDTO response = expenseService.getExpenseById(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

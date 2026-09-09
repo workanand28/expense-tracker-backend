@@ -1,9 +1,18 @@
 package com.example.expense_tracker.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 public class ExpenseRequestDTO {
 
+    @Positive(message = "Amount must be greater than zero")
     private double amount;
+
+    @NotBlank(message = "Category is required")
     private String category;
+
+
+    @NotBlank(message = "Description is required")
     private String description;
 
 

@@ -1,4 +1,5 @@
 package com.example.expense_tracker.service;
+import com.example.expense_tracker.exception.ExpenseNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -44,5 +45,22 @@ public class ExpenseServiceImpl implements ExpenseService {
 
         return responseDTO;
 
+    }
+
+    @Override
+    public ExpenseResponseDTO getExpenseById(String id) {
+
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow( () -> new ExpenseNotFoundException("Expense with id: " + id + " not found!"));
+
+        ExpenseResponseDTO responseDTO = new ExpenseResponseDTO();
+
+        responseDTO.setId(expense.getId());
+        responseDTO.setAmount(expense.getAmount());
+        responseDTO.setCategory(expense.getCategory());
+        responseDTO.setDescription(expense.getDescription());
+        responseDTO.setDate(expense.getDate());
+
+        return responseDTO;
     }
 }
