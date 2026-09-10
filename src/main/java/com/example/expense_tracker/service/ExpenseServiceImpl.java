@@ -7,7 +7,8 @@ import com.example.expense_tracker.dto.ExpenseResponseDTO;
 import com.example.expense_tracker.dto.ExpenseRequestDTO;
 import com.example.expense_tracker.entity.Expense;
 import com.example.expense_tracker.repository.ExpenseRepository;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 
@@ -62,5 +63,23 @@ public class ExpenseServiceImpl implements ExpenseService {
         responseDTO.setDate(expense.getDate());
 
         return responseDTO;
+    }
+
+    @Override
+    public Page<ExpenseResponseDTO> getAllExpenses(
+            Pageable pageable) {
+
+        Page<Expense> expensePage =
+                expenseRepository.findAll(pageable);
+
+        return expensePage.map(expense ->
+                new ExpenseResponseDTO(
+                        expense.getId(),
+                        expense.getAmount(),
+                        expense.getCategory(),
+                        expense.getDescription(),
+                        expense.getDate()
+                )
+        );
     }
 }
