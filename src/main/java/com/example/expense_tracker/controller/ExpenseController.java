@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.expense_tracker.dto.ExpenseRequestDTO;
 import com.example.expense_tracker.dto.ExpenseResponseDTO;
 import com.example.expense_tracker.service.ExpenseService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 @RestController
@@ -34,5 +36,15 @@ public class ExpenseController {
         ExpenseResponseDTO response = expenseService.getExpenseById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<ExpenseResponseDTO>> getAllExpenses(
+            Pageable pageable) {
+
+        Page<ExpenseResponseDTO> response =
+                expenseService.getAllExpenses(pageable);
+
+        return ResponseEntity.ok(response);
     }
 }
