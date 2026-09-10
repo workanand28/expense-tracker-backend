@@ -11,6 +11,8 @@ import com.example.expense_tracker.service.ExpenseService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping({"/api/expenses", "/api/expense"})
@@ -44,6 +46,41 @@ public class ExpenseController {
 
         Page<ExpenseResponseDTO> response =
                 expenseService.getAllExpenses(pageable);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<ExpenseResponseDTO>> getExpensesByCategory(@PathVariable String category) {
+        List<ExpenseResponseDTO> response = expenseService.getExpensesByCategory(category);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<ExpenseResponseDTO>> searchExpenses(
+
+            @RequestParam(required = false)
+            String category,
+
+            @RequestParam(required = false)
+            Double minAmount,
+
+            @RequestParam(required = false)
+            Double maxAmount,
+
+            @RequestParam(required = false)
+            String search,
+
+            Pageable pageable) {
+
+        Page<ExpenseResponseDTO> response =
+                expenseService.searchExpenses(
+                        category,
+                        minAmount,
+                        maxAmount,
+                        search,
+                        pageable
+                );
 
         return ResponseEntity.ok(response);
     }

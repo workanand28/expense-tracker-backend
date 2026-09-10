@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Service
@@ -71,6 +72,54 @@ public class ExpenseServiceImpl implements ExpenseService {
 
         Page<Expense> expensePage =
                 expenseRepository.findAll(pageable);
+
+        return expensePage.map(expense ->
+                new ExpenseResponseDTO(
+                        expense.getId(),
+                        expense.getAmount(),
+                        expense.getCategory(),
+                        expense.getDescription(),
+                        expense.getDate()
+                )
+        );
+    }
+
+    @Override
+    public List<ExpenseResponseDTO> getExpensesByCategory(
+            String category) {
+
+        List<Expense> expenses =
+                expenseRepository.findByCategory(category);
+
+        return expenses.stream()
+                .map(expense ->
+                        new ExpenseResponseDTO(
+                                expense.getId(),
+                                expense.getAmount(),
+                                expense.getCategory(),
+                                expense.getDescription(),
+                                expense.getDate()
+                        )
+                )
+                .toList();
+    }
+
+    @Override
+    public Page<ExpenseResponseDTO> searchExpenses(
+            String category,
+            Double minAmount,
+            Double maxAmount,
+            String search,
+            Pageable pageable) {
+
+        Page<Expense> expensePage =
+                expenseRepository.searchExpenses(
+                        category,
+                        minAmount,
+                        maxAmount,
+                        search,
+                        pageable
+                );
 
         return expensePage.map(expense ->
                 new ExpenseResponseDTO(

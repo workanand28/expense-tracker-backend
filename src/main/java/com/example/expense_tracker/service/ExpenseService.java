@@ -5,6 +5,8 @@ import com.example.expense_tracker.dto.ExpenseResponseDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface ExpenseService {
 
     ExpenseResponseDTO createExpense(ExpenseRequestDTO requestDTO);
@@ -12,4 +14,14 @@ public interface ExpenseService {
     ExpenseResponseDTO getExpenseById(String id);
 
     Page<ExpenseResponseDTO> getAllExpenses(Pageable pageable);
+
+    List<ExpenseResponseDTO> getExpensesByCategory(
+            String category);
+
+    Page<ExpenseResponseDTO> searchExpenses(
+            String category,
+            Double minAmount,
+            Double maxAmount,
+            String search,
+            Pageable pageable);
 }
